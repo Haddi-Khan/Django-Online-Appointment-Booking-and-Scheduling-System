@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        /* Body ko full height de kar flexbox se center kiya */
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center; /* Vertical center */
+            justify-content: center; /* Horizontal center */
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px; /* Card ki width set ki */
+        }
+
+        .card-header {
+            background: #2d3436;
+            color: white;
+            border-radius: 20px 20px 0 0 !important;
+            padding: 25px;
+        }
+
+        .btn-primary {
+            background: #6c5ce7;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover { background: #a29bfe; transform: translateY(-2px); }
+        .form-label { font-weight: 600; color: #2d3436; }
+        .form-control { border-radius: 10px; padding: 10px; border: 1px solid #dfe6e9; }
+    </style>
+</head>
+<body>
+
+<div class="card p-0">
+    <div class="card-header text-center">
+        <h3 class="mb-0">📅 Online Booking</h3>
+    </div>
+    <div class="card-body p-4">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info text-center border-0 shadow-sm">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Service Type</label>
+                {{ form.service }}
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Date</label>
+                    {{ form.date }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Time</label>
+                    {{ form.time }}
+                </div>
+            </div>
+
+            <div class="d-grid mt-3">
+                <button type="submit" class="btn btn-primary">Confirm My Booking</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://jsdelivr.net"></script>
+</body>
+</html>
